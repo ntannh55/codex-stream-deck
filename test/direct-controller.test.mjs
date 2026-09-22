@@ -20,10 +20,17 @@ test("direct actions map to the intended shortcut", () => {
   assert.match(directActionScript("reject"), /key code 53/);
 });
 
+test("Fast mode uses its configured direct shortcut without searching the command menu", () => {
+  for (const locale of ["de", "en", "unknown"]) {
+    const script = directActionScript("fast", { env: {}, locale });
+    assert.match(script, /keystroke "f" using \{command down, control down, option down\}/);
+    assert.doesNotMatch(script, /keystroke "k"|key code 36/);
+  }
+});
+
 test("commands support configured locale and reject control characters", () => {
-  assert.match(directActionScript("fast", { env: {} }), /Schnellmodus umschalten/);
   assert.match(directActionScript("split", { env: {}, locale: "en" }), /Fork chat/);
-  assert.equal(directActionScript("fast", { env: {}, locale: "unknown" }), null);
+  assert.equal(directActionScript("split", { env: {}, locale: "unknown" }), null);
   assert.equal(directActionScript("fast", { env: { CODEX_DECK_FAST_COMMAND: 'x\nkey code 36' } }), null);
   assert.ok(directActionScript("fast", { env: { CODEX_DECK_FAST_COMMAND: 'Custom "fast"' } }).includes(JSON.stringify('Custom "fast"')));
 });

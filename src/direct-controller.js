@@ -61,6 +61,9 @@ export function directActionScript(action, opts = {}) {
   const env = opts.env ?? process.env;
   const locale = opts.locale ?? env.CODEX_DECK_LOCALE ?? "de";
   const keystroke = {
+    // Codex exposes this as a configurable shortcut, not a command-menu item.
+    // Assign Control+Option+Command+F to "Toggle Fast mode" in Codex settings.
+    fast: env.CODEX_DECK_FAST_COMMAND ? null : 'keystroke "f" using {command down, control down, option down}',
     "quick-chat": 'keystroke "n" using {command down, option down}',
     archive: 'keystroke "a" using {command down, shift down}',
     voice: 'keystroke "v" using {control down, shift down}',
@@ -69,8 +72,8 @@ export function directActionScript(action, opts = {}) {
     "reasoning-down": 'key code 125 using {command down, control down}',
   }[action];
   const commands = {
-    de: { fast: "Schnellmodus umschalten", split: "Chat verzweigen" },
-    en: { fast: "Toggle Fast mode", split: "Fork chat" },
+    de: { split: "Chat verzweigen" },
+    en: { split: "Fork chat" },
   };
   const command = action === "fast" ? env.CODEX_DECK_FAST_COMMAND ?? commands[locale]?.fast
     : action === "split" ? env.CODEX_DECK_SPLIT_COMMAND ?? commands[locale]?.split : null;

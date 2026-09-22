@@ -10,7 +10,8 @@ Start with `npm run doctor`. It checks the environment without opening the Strea
 | Weekly gauge shows no data | Sign in normally to Codex; check `CODEX_CLI_BIN`. Unsupported, expired or unavailable account data intentionally stays unknown. |
 | Task key works, archive/action keys do not | Deep links need no keyboard automation; action keys need macOS Accessibility and Automation permissions. Check the bridge log for a categorized error. |
 | Archive appears to do nothing | It sends Cmd+Shift+A to the active Codex task. Confirm that a task is open and its shortcut is unchanged; an active task may have additional app behavior. Test with a disposable task. |
-| Fast/fork selects no command | Match `CODEX_DECK_LOCALE` to the app and override the exact command title if necessary. |
+| Fast mode does nothing | Assign Control+Option+Command+F to “Toggle Fast mode” in Codex keyboard shortcut settings. Leave `CODEX_DECK_FAST_COMMAND` unset. Current Codex exposes this action as a shortcut, not a command-palette entry. |
+| Fork selects no command | Match `CODEX_DECK_LOCALE` to the app and override the exact command title if necessary. |
 | Reasoning dial does nothing | Current app builds may have no default reasoning shortcuts. Assign Cmd+Ctrl+Up / Cmd+Ctrl+Down in Codex keyboard settings, or change `src/direct-controller.js`. Plus hardware is unverified. |
 | Login worked before a Node update | The installer records a specific Node executable. Reinstall the bridge after removing/moving that Node installation. |
 | Icons missing / native module error | Use a standard Node runtime matching the Mac architecture, then `npm ci`. App-embedded signed runtimes may reject external native modules. |

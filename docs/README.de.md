@@ -53,7 +53,9 @@ Entfernen: `npm run uninstall:autostart`. Laufzeit und Dienstdatei werden in den
 
 ## Sprache und andere Installationsorte
 
-Die Tastenbeschriftungen sind deutsch. Für englische Befehlsnamen: `CODEX_DECK_LOCALE=en npm start` bzw. dieselbe Variable vor `npm run install:autostart` setzen. Abweichende Befehlsnamen lassen sich über `CODEX_DECK_FAST_COMMAND` und `CODEX_DECK_SPLIT_COMMAND` einstellen. Andere CLI-Installationsorte über `CODEX_CLI_BIN`, eine bestimmte Node-Laufzeit über `CODEX_NODE_BIN` setzen. Details in der [englischen README](../README.md#configuration).
+Für Fast Mode in den Codex-Tastenkürzeleinstellungen „Schnellmodus umschalten“ auf **Control+Option+Command+F** legen. Die Streamdeck-Taste sendet dieses Kürzel direkt. Der Befehl steht in der aktuellen Codex-Version nicht in der Befehlspalette zur Verfügung.
+
+Die Tastenbeschriftungen sind deutsch. Für englische Befehlsnamen: `CODEX_DECK_LOCALE=en npm start` bzw. dieselbe Variable vor `npm run install:autostart` setzen. Der Befehl zum Verzweigen lässt sich über `CODEX_DECK_SPLIT_COMMAND` einstellen. `CODEX_DECK_FAST_COMMAND` ist nur ein optionaler Altversions-Override und sollte für das direkte Fast-Mode-Kürzel nicht gesetzt sein. Andere CLI-Installationsorte über `CODEX_CLI_BIN`, eine bestimmte Node-Laufzeit über `CODEX_NODE_BIN` setzen. Details in der [englischen README](../README.md#configuration).
 
 ## Datenschutz und Hilfe
 

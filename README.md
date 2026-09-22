@@ -31,7 +31,7 @@ It is not a fit for Claude Code, browser-only or cloud-only task workflows, Wind
 - Requires Codex's local `~/.codex/sqlite/codex-dev.db` catalog and `~/.codex/sessions` layout. Read status uses `electron-thread-read-state-v1` in `~/.codex/.codex-global-state.json`, when it resolves to one account and one local execution host. These are internal formats and can change after Codex updates. Remote/cloud tasks are not represented by local running-state discovery.
 - Default key captions and command searches are **German**. English command-search presets are available; see configuration below. App shortcuts may differ with customization, version or language.
 - **Approve is Enter; Reject is Escape.** They act on the currently focused Codex control. Enter can also send a draft. They do not validate or select a specific pending approval. Use only while looking at Codex.
-- Fast/fork use the command palette and depend on the exact visible command name. Voice is a toggle shortcut, not push-to-talk. Direct-mode reasoning dials require configuring Codex shortcuts; see the troubleshooting guide.
+- Fast mode requires assigning Control+Option+Command+F to “Toggle Fast mode” in Codex keyboard shortcut settings. Fork uses the command palette and depends on the exact visible command name. Voice is a toggle shortcut, not push-to-talk. Direct-mode reasoning dials require configuring Codex shortcuts; see the troubleshooting guide.
 - Key input needs macOS **Accessibility** and **Automation** permission for the process running the bridge. The installer does not grant permissions.
 - Software tests and successful USB writes do not prove a physical key's app effect. See [verification status](docs/VERIFICATION.md).
 
@@ -104,7 +104,7 @@ CODEX_DECK_LOCALE=en npm run install:autostart
 | Variable | Meaning |
 | --- | --- |
 | `CODEX_DECK_LOCALE` | Command palette language: `de` (default) or `en`. Does not translate key captions. |
-| `CODEX_DECK_FAST_COMMAND` | Exact Fast-mode command palette title, if the preset does not match. |
+| `CODEX_DECK_FAST_COMMAND` | Optional legacy command-palette override. Leave unset for the direct Control+Option+Command+F shortcut; current Codex does not expose Fast mode in the command palette. |
 | `CODEX_DECK_SPLIT_COMMAND` | Exact fork command palette title, if the preset does not match. |
 | `CODEX_CLI_BIN` | Absolute path to the Codex CLI used for the weekly gauge. |
 | `CODEX_NODE_BIN` | Absolute path to Node used by the installer. Use a normal Node distribution. |
